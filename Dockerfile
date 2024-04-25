@@ -1,25 +1,15 @@
 FROM centos:7
-MAINTAINER ali.lotfi.linux@gmail.com
 
-# Install necessary packages
-RUN yum install -y httpd \
-    zip \
-    unzip
+# Install Apache
+RUN yum install -y httpd
 
-# Copy the local photogenic.zip file into the container
-COPY photogenic.zip /tmp/
+# Copy HTML file into the container
+COPY index.html /var/www/html/
 
-# Extract the contents of photogenic.zip
-RUN unzip /tmp/photogenic.zip -d /var/www/html/
-
-# Remove the temporary zip file
-RUN rm /tmp/photogenic.zip
-
-# Set the working directory
-WORKDIR /var/www/html/
-
-# Start Apache in the foreground when the container starts
-CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
-
-# Expose port 80
+# Expose port 80 for HTTP traffic
 EXPOSE 80
+
+# Start Apache service
+CMD ["httpd", "-D", "FOREGROUND"]
+
+
