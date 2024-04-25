@@ -1,18 +1,17 @@
----
 - name: Deploy Application
   hosts: all
   become: true
   tasks:
     - name: Ensure application directory exists
       file:
-        path: /opt/myapp
+        path: /var/www/myapp
         state: directory
         mode: '0755'
 
     - name: Copy application files
       copy:
-        src: /path/to/your/application
-        dest: /opt/myapp
+        src: /home/user/app
+        dest: /var/www/myapp
         remote_src: yes
 
     - name: Ensure application service is running
