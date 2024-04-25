@@ -1,21 +1,45 @@
-- name: Deploy Application
+---
+- name: Archive build image
   hosts: all
-  become: true
+  connection: local
   tasks:
-    - name: Ensure application directory exists
-      file:
-        path: /var/www/myapp
-        state: directory
-        mode: '0755'
+    - name: Archive image locally
+      docker_image:
+        name: "ansibleimage:v1.${BUILD_ID}"
+        archive_path: "./apache-jenkins.tar"
+        source: local
 
-    - name: Copy application files
+- name: Deploy container
+  hosts: all
+  tasks:
+    - name: Copy image to dev
       copy:
-        src: /home/user/app
-        dest: /var/www/myapp
-        remote_src: yes
-
-    - name: Ensure application service is running
-      systemd:
-        name: myapp
+        src: "./apache-jenkins.tar"
+        dest: "/root/dev/"
+        
+    - name: Load image
+      docker_image:
+        name: "ansibleimage:v1.${BUILD_ID}"
+        load_path: "/root/dev/apache-jenkins.tar"
+        source: load
+        
+    - name: Start container
+      docker_container:
+        name: "jenkins-container"
+        image: "alilotfi/ansibleimage:latest"
+        ports:
+          - "8585:8080"
         state: started
-
+        
+    - name: Remove dev directory
+      file:
+        path: "/root/dev/"
+        state: absent
+        
+    - name: Tag and push to Docker Hub
+      docker_image:
+        name: "alilotfi/ansibleimage"
+        repository: "alilotfi/ansibleimage"
+        tag: "latest"
+        push: yes
+        source: local
