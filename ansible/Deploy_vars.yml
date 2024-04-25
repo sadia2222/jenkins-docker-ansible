@@ -1,12 +1,12 @@
 ---
- - src: ./apache-jenkins.tar
- - dest: /root/dev/
- - imageloadname: alilotfi/jenkins-docker-ansible:latest
- - loadpath: /root/dev/apache-jenkins.tar
- - containername: apache-jenkins
- - containerimage: alilotfi/jenkins-docker-ansible:latest
- - portnum: "8585:8080"
- - dir: /root/dev/
- - pushname: alilotfi/jenkins-docker-ansible
- - repo: alilotfi/jenkins-docker-ansible
- - imagetag: latest
+src: ./apache-jenkins.tar  # Path to the Apache Jenkins tar file
+dest: /root/dev/  # Destination directory on the target host
+imageloadname: ${JOB_NAME}:v1.${BUILD_ID}  # Name for loading the Docker image
+loadpath: /root/dev/apache-jenkins.tar  # Path to the Apache Jenkins tar file on the target host
+containername: jenkins-container  # Name for the Docker container
+containerimage: alilotfi/${JOB_NAME}:latest  # Name for the Docker image to be used in the container
+portnum: "8585:8080"  # Port mapping for the Docker container
+dir: /root/dev/  # Directory path used for various operations
+pushname: alilotfi/${JOB_NAME}  # Name for pushing the Docker image to a registry
+repo: alilotfi/${JOB_NAME}  # Repository name for the Docker image
+imagetag: latest  # Tag for the Docker image
