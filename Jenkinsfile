@@ -4,8 +4,8 @@ pipeline {
   stages {
     stage('building image') {
       steps {
-        bat 'docker image build -t $JOB_NAME:v1.$BUILD_ID .'
-        bat 'docker image tag $JOB_NAME:v1.$BUILD_ID alilotfi/$JOB_NAME:latest'
+        bat "docker image build -t $JOB_NAME:v1.$BUILD_ID ."
+        bat "docker image tag $JOB_NAME:v1.$BUILD_ID alilotfi/$JOB_NAME:latest"
       }
     }
 
@@ -13,7 +13,7 @@ pipeline {
       steps {
         script {
           
-          bat 'ansible --version'
+          bat "ansible --version"
 
         }
       }
@@ -23,7 +23,7 @@ pipeline {
 
       steps {
 
-        bat 'ansible-playbook -i /etc/ansible/hosts -u ubuntu /var/lib/jenkins/workspace/jenkins-docker-ansible/ansible/play.yml'
+        bat "ansible-playbook -i /etc/ansible/hosts -u ubuntu /var/lib/jenkins/workspace/jenkins-docker-ansible/ansible/play.yml"
 
       }
     }
