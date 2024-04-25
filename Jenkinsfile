@@ -1,26 +1,31 @@
 pipeline {
-    agent any
+  agent any
 
-    stages {
-        stage('building image') {
-            steps {
-                sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID .'
-                sh 'docker image tag $JOB_NAME:v1.$BUILD_ID alilotfi/$JOB_NAME:latest'
-            }
-        }
-
-        stage('Ansible version') {
-            steps {
-                script {
-                    sh 'nohup ansible --version || /usr/bin/nohup ansible --version || /bin/nohup ansible --version'
-                }
-            }
-        }
-
-        stage('Ansible Deploy') {
-            steps {
-                sh 'ansible-playbook -i /etc/ansible/hosts -u ubuntu /var/lib/jenkins/workspace/jenkins-docker-ansible/ansible/play.yml'
-            }
-        }
+  stages {
+    stage('building image') {
+      steps {
+        bat 'docker image build -t $JOB_NAME:v1.$BUILD_ID .'
+        bat 'docker image tag $JOB_NAME:v1.$BUILD_ID alilotfi/$JOB_NAME:latest'
+      }
     }
+
+    stage('Ansible version') {
+      steps {
+        script {
+          
+          bat 'ansible --version'
+
+        }
+      }
+    }
+
+    stage('Ansible Deploy') {
+
+      steps {
+
+        bat 'ansible-playbook -i /etc/ansible/hosts -u ubuntu /var/lib/jenkins/workspace/jenkins-docker-ansible/ansible/play.yml'
+
+      }
+    }
+  }
 }
