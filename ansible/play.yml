@@ -1,44 +1,21 @@
 ---
-- name: Archive build image
+- name: Deploy Application
   hosts: all
-  connection: local
-  vars_files:
-     - Archive_vars.yml
+  become: true
   tasks:
-    - name: Archive image localy
-      docker_image:
-        name: "{{ image }}"
-        archive_path: "{{ archive }}"
-        source: local
-- name: Deploy container
-  hosts: all
-  vars_files:
-     - Deploy_vars.yml
-  tasks:
-    - name: cpoy image to dev
-      copy:
-        src: "{{ src }}"
-        dest: "{{ dest }}"
-    - name: load image
-      docker_image:
-        name: "{{ imageloadname }}"
-        load_path: "{{ loadpath }}"
-        source: load
-    - name: Start container
-      docker_container:
-        name: "{{ containername }}"
-        image: "{{ containerimage }}"
-        ports:
-          - "{{ portnum }}"
-        state: started
-    - name: Remove dev directory
+    - name: Ensure application directory exists
       file:
-        path: "{{ dir }}"
-        state: absent
-    - name: Tag and push to docker hub
-      docker_image:
-        name: "{{ pushname }}"
-        repository: "{{ repo }}"
-        tag: "{{ imagetag }}"
-        push: yes
-        source: local
+        path: /opt/myapp
+        state: directory
+        mode: '0755'
+
+    - name: Copy application files
+      copy:
+        src: /path/to/your/application
+        dest: /opt/myapp
+        remote_src: yes
+
+    - name: Ensure application service is running
+      systemd:
+        name: myapp
+        state: restarted
