@@ -18,4 +18,5 @@
     - name: Ensure application service is running
       systemd:
         name: myapp
-        state: restarted
+        state: started
+
