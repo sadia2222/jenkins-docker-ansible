@@ -22,7 +22,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Assuming you have Ansible installed in the Docker container
-                bat "docker run --rm alilotfi/${JOB_NAME}:latest ansible-playbook -i /etc/ansible/hosts -u ubuntu /var/lib/jenkins/workspace/jenkins-docker-ansible/ansible/play.yml"
+                bat "docker run --rm alilotfi/ansibleimage:latest ansible-playbook -i /etc/ansible/hosts -u ubuntu /var/lib/jenkins/workspace/jenkins-docker-ansible/ansible/play.yml"
             }
         }
     }
