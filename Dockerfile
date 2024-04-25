@@ -1,8 +1,19 @@
-# Use a base image with Python installed
-FROM python:3.9
+# Use a base image with Python pre-installed
+FROM python:3.9-slim
 
-# Install Ansible and any other dependencies
-RUN pip install ansible
+# Install necessary dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    ansible \
+    && \
+    rm -rf /var/lib/apt/lists/*
 
-# Set the entrypoint to the Ansible command
-ENTRYPOINT ["ansible"]
+# Set the working directory
+WORKDIR /ansible
+
+# Optionally, you can mount your Ansible playbook directory as a volume
+# VOLUME /ansible/playbooks
+
+# Define default command to run when the container starts
+CMD ["ansible-playbook", "--version"]
+
