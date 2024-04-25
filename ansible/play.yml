@@ -25,7 +25,7 @@
         
     - name: Start container
       docker_container:
-        name: "jenkins-container"
+        name: "ansiblecontainer"
         image: "alilotfi/ansibleimage:latest"
         ports:
           - "8585:8080"
