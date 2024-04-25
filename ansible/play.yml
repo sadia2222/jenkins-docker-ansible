@@ -26,7 +26,7 @@
     - name: Start container
       docker_container:
         name: "ansiblecontainer"
-        image: "alilotfi/ansibleimage:latest"
+        image: "ansibleimage:latest"
         ports:
           - "8585:8080"
         state: started
@@ -38,8 +38,8 @@
         
     - name: Tag and push to Docker Hub
       docker_image:
-        name: "alilotfi/ansibleimage"
-        repository: "alilotfi/ansibleimage"
+        name: "ansibleimage"
+        repository: "secrepo/ansibleimage"
         tag: "latest"
         push: yes
         source: local
