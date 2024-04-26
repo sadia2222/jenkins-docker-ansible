@@ -5,7 +5,7 @@
   tasks:
     - name: Archive image locally
       docker_image:
-        name: "ansibleimage:v1.${BUILD_ID}"
+        name: "ansibleimg:v1.${BUILD_ID}"
         archive_path: "./apache-jenkins.tar"
         source: local
 
@@ -19,14 +19,14 @@
         
     - name: Load image
       docker_image:
-        name: "ansibleimage:v1.${BUILD_ID}"
+        name: "ansibleimg:v1.${BUILD_ID}"
         load_path: "/root/dev/apache-jenkins.tar"
         source: load
         
     - name: Start container
       docker_container:
         name: "ansiblecontainer"
-        image: "ansibleimage:latest"
+        image: "ansibleimg:latest"
         ports:
           - "8585:8080"
         state: started
@@ -38,8 +38,8 @@
         
     - name: Tag and push to Docker Hub
       docker_image:
-        name: "ansibleimage"
-        repository: "secrepo/ansibleimage"
+        name: "ansibleimg"
+        repository: "secrepo/ansibleimg"
         tag: "latest"
         push: yes
         source: local
