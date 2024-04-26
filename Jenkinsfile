@@ -7,7 +7,7 @@ pipeline {
                 script {
                     def dockerImageTag = "${JOB_NAME}:v1.${BUILD_ID}"
                     bat "docker build -t ansibleimage ."
-                    bat "docker tag ansibleimage:latest alilotfi/${JOB_NAME}:latest"
+                    bat "docker tag ansibleimage:latest cdrepo/${JOB_NAME}:latest"
                 }
             }
         }
@@ -22,7 +22,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Assuming you have Ansible installed in the Docker container
-                bat "docker run --rm alilotfi/ansibleimage:latest ansible-playbook -i /etc/ansible/hosts -u ubuntu /var/lib/jenkins/workspace/jenkins-docker-ansible/ansible/play.yml"
+               bat "docker run --rm cdrepo/ansibleimage:latest ansible-playbook -i /etc/ansible/hosts -u ubuntu /var/lib/jenkins/workspace/jenkins-docker-ansible/ansible/play.yml"
+
             }
         }
     }
