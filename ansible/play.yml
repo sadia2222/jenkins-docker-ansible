@@ -39,7 +39,7 @@
     - name: Tag and push to Docker Hub
       docker_image:
         name: "ansibleimg"
-        repository: "secrepo/ansibleimg"
+        repository: "sadiaarshad/ansibleimg"
         tag: "latest"
         push: yes
         source: local
