@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Git repository URL
-                    def gitRepoUrl = 'https://github.com/sadia2222/jenkins-docker-ansible.git'
+                    def gitRepoUrl = "https://github.com/sadia2222/jenkins-docker-ansible.git"
 
                     // Checkout from Git without specifying credentials ID
                     checkout([$class: 'GitSCM',
