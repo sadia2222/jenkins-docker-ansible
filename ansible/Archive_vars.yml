@@ -1,4 +1,3 @@
 ---
-image: alilotfi/jenkins-docker-ansible  # Name of the Docker image
-archive: ./apache-jenkins.tar  # Path to the Apache Jenkins tar file
-
+image: cdrepo/ansibleimg  # Name of the Docker image
+archive: ./ansibleimg.tar  # Path to the Ansible image tar file
