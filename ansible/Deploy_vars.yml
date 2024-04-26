@@ -4,10 +4,11 @@ dest: /root/dev/  # Destination directory on the target host
 imageloadname: ansibleimg:v1.${BUILD_ID}  # Name for loading the Docker image
 loadpath: /root/dev/ansibleimg.tar  # Path to the Ansible image tar file on the target host
 containername: jenkins-container  # Name for the Docker container
-containerimage: cdrepo/ansibleimg:latest  # Name for the Docker image to be used in the container
+containerimage: sadiaarshad/ansibleimg:latest  # Name for the Docker image to be used in the container
 portnum: "8585:8080"  # Port mapping for the Docker container
 dir: /root/dev/  # Directory path used for various operations
-pushname: cdrepo/ansibleimg  # Name for pushing the Docker image to a registry
-repo: cdrepo/ansibleimg  # Repository name for the Docker image
+pushname: sadiaarshad/ansibleimg  # Name for pushing the Docker image to a registry
+repo: sadiaarshad/ansibleimg  # Repository name for the Docker image
 imagetag: latest  # Tag for the Docker image
+
 
