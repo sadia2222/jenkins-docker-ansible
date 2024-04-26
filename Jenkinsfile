@@ -4,7 +4,6 @@ pipeline {
     environment {
         DOCKER_IMAGE_TAG = "ansibleimg:v1.${BUILD_ID}"
         DOCKER_REPO = "sadiaarshad/cd_midlabpipeline"
-        ANSIBLE_PLAYBOOK_PATH =  "/var/lib/jenkins/workspace/labmid_cdpipeline/ansible/play.yml"
     }
 
     stages {
@@ -37,8 +36,8 @@ pipeline {
         
         stage('Deploy') {
             steps {
-                // Run Ansible playbook
-                bat "docker run --rm ${DOCKER_REPO}:latest ansible-playbook -i /etc/ansible/hosts -u ubuntu ${ANSIBLE_PLAYBOOK_PATH}"
+                // Echo a message to indicate deployment phase
+                echo 'Deploying application...'
             }
         }
     }
