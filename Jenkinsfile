@@ -2,22 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                script {
-                    // Git repository URL
-                    def gitRepoUrl = "https://github.com/sadia2222/jenkins-docker-ansible.git"
-
-                    // Checkout from Git without specifying credentials ID
-                    checkout([$class: 'GitSCM',
-                              branches: [[name: 'main']],
-                              userRemoteConfigs: [[url: gitRepoUrl]]])
-                }
-            }
-        }
-
-
-    stages {
         stage('Build Docker Image') {
             steps {
                 script {
