@@ -34,12 +34,5 @@ pipeline {
                 bat "echo Running tests..."
             }
         }
-
-        stage('Deploy') {
-            steps {
-                // Run Ansible playbook
-                bat "docker run --rm ${DOCKER_REPO}:latest ansible-playbook -i /etc/ansible/hosts -u ubuntu ${ANSIBLE_PLAYBOOK_PATH}"
-            }
-        }
     }
 }
