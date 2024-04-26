@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE_TAG = "ansibleimg:v1.${BUILD_ID}"
         DOCKER_REPO = "sadiaarshad/cd_midlabpipeline"
-        ANSIBLE_PLAYBOOK_PATH =  "/var/lib/jenkins/workspace/labmidpipeline/ansible/play.yml"
+        ANSIBLE_PLAYBOOK_PATH =  "/var/lib/jenkins/labmid_cdpipeline/ansible/play.yml"
     }
 
     stages {
