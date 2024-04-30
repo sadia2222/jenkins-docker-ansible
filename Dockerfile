@@ -12,8 +12,7 @@ RUN apt-get update && \
 WORKDIR /ansible
 
 # Optionally, you can mount your Ansible playbook directory as a volume
-# VOLUME /ansible/playbooks
+ VOLUME /ansible/playbooks
 
 # Define default command to run when the container starts
-CMD ["ansible-playbook", "--version"]
-
+CMD tail -f /dev/null
