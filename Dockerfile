@@ -12,8 +12,8 @@ RUN apt-get update && \
 # Set the working directory
 WORKDIR /ansible
 
-# Copy your Ansible playbook directory into the container
-COPY playbooks /ansible/playbooks
+# Copy a simple HTML page to serve
+COPY index.html /usr/share/nginx/html/
 
 # Expose port for HTTP
 EXPOSE 80
