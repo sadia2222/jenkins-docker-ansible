@@ -11,8 +11,8 @@ RUN apt-get update && \
 # Set the working directory
 WORKDIR /ansible
 
-# Optionally, you can mount your Ansible playbook directory as a volume
- VOLUME /ansible/playbooks
+# Expose port for HTTP
+EXPOSE 80
 
 # Define default command to run when the container starts
-CMD tail -f /dev/null
+CMD ["bash"]
